@@ -16,7 +16,7 @@ export default function ContactCTA() {
 
       <div className="editorial-container relative">
         <div className="max-w-3xl space-y-8">
-          <SectionLabel number="07" label="INQUIRIES & COMMISSIONS" />
+          <SectionLabel number="08" label="INQUIRIES & COMMISSIONS" />
 
           <h2 className="font-serif text-4xl sm:text-6xl lg:text-7xl font-normal text-[#F7F4EC] tracking-tight leading-[1.06]">
             Have a story

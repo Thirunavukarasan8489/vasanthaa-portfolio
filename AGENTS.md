@@ -1824,14 +1824,15 @@ The production-ready personal portfolio website for **Vasanthaa** (Content Write
 - **Styling:** Tailwind CSS v4 with bespoke CSS design variables (`globals.css`) adhering to the editorial palette (`#053827` primary dark green, `#C8A75A` gold accent, `#F7F4EC` warm cream, `#10221C` dark text).
 - **Typography:** Configured with `next/font/google` using `DM_Serif_Display` (headings), `Manrope` (body and UI), and `Caveat` (subtle handwritten accents).
 - **Rendering Strategy:** Server Components by default. Client Components isolated to interactive islands:
-  - `components/layout/MobileMenu.tsx` (accessible full-screen mobile menu drawer with locked body scroll)
+  - `components/layout/MobileMenu.tsx` (smooth hardware-accelerated sliding drawer with backdrop blur overlay, keyboard accessibility, and locked body scroll)
   - `components/layout/Header.tsx` (sticky navigation with scroll detection)
   - `components/audio/AudioPlayer.tsx` and `components/audio/AudioWaveform.tsx` (custom audio player with synchronized single playback)
   - `components/work/WorkFilters.tsx` (instant client-side category filtering)
   - `components/contact/ContactForm.tsx` (React Hook Form + Zod client validation and async submission)
+  - `components/home/Testimonials.tsx` (interactive editorial endorsement slider with quote marks, metric badges, and keyboard controls)
 
 #### 2. Pages & Routes Delivered
-- `/`: Editorial Homepage composed of Hero, CSS infinite Marquee, Services preview with arrow hover transitions, Selected Disciplines (Words Written, Words Voiced, On-Camera), Voice Showcase, kinetic typography Industries ticker, About preview, and closing Contact CTA.
+- `/`: Editorial Homepage composed of Hero, CSS infinite Marquee, Services preview with arrow hover transitions, Selected Disciplines (Words Written, Words Voiced, On-Camera), Voice Showcase, kinetic typography Industries ticker, Testimonials & Trust showcase, About preview, and closing Contact CTA.
 - `/about`: Detailed story of Vasanthaa's journey, 2+ years experience stamp, core philosophy of rhythm in text and vocal sincerity, and domain breadth.
 - `/services`: Comprehensive catalog with 10 Content Writing services and 10 Voice Over services with included deliverables and direct inquiry triggers.
 - `/work`: Portfolio hub with dynamic category filtering across All, Written, Voice-Over, and On-Camera works.

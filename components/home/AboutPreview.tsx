@@ -9,7 +9,7 @@ export default function AboutPreview() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           {/* Left Column — Big Editorial Header & Experience Stamp */}
           <div className="lg:col-span-5 space-y-8">
-            <SectionLabel number="06" label="ABOUT ME" />
+            <SectionLabel number="07" label="ABOUT ME" />
 
             <h2 className="font-serif text-4xl lg:text-6xl font-normal text-[#F7F4EC] tracking-tight leading-[1.1]">
               Where<br />

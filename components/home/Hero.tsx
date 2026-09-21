@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowDownRight, Sparkles } from "lucide-react";
+import { ArrowDownRight, PencilSparkles } from "lucide-react";
 import SectionLabel from "@/components/ui/SectionLabel";
 
 export default function Hero() {
@@ -44,7 +44,8 @@ export default function Hero() {
 
             {/* Core Brand Positioning */}
             <p className="font-serif italic text-2xl lg:text-3xl text-[#DCEAE5] leading-relaxed max-w-xl font-light">
-              &ldquo;I shape thoughts into words and tune voices that make every message felt.&rdquo;
+              &ldquo;I shape thoughts into words and tune voices that make every
+              message felt.&rdquo;
             </p>
 
             {/* Aesthetic Words x Voice Identity Graphic */}
@@ -112,7 +113,7 @@ export default function Hero() {
 
               {/* Bottom tag */}
               <div className="absolute bottom-6 right-6 bg-[#021D15]/90 border border-[#053827] px-3 py-1.5 text-[11px] font-mono text-[#C8A75A] flex items-center gap-1.5 backdrop-blur-sm">
-                <Sparkles className="w-3 h-3 text-[#C8A75A]" />
+                <PencilSparkles className="w-3 h-3 text-[#C8A75A]" />
                 <span>Available for Q2 Collaborations</span>
               </div>
             </div>
@@ -161,7 +162,8 @@ export default function Hero() {
 
           {/* Message */}
           <p className="font-serif italic text-lg text-[#DCEAE5] leading-snug">
-            &ldquo;I shape thoughts into words and tune voices that make every message felt.&rdquo;
+            &ldquo;I shape thoughts into words and tune voices that make every
+            message felt.&rdquo;
           </p>
 
           {/* CTA */}
