@@ -1,0 +1,36 @@
+<svg width="900" height="1100" viewBox="0 0 900 1100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="900" height="1100" fill="#053827"/>
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#126249" stop-opacity="0.8"/>
+      <stop offset="60%" stop-color="#053827" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#021D15"/>
+    </radialGradient>
+    <linearGradient id="gold-line" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#C8A75A"/>
+      <stop offset="50%" stop-color="#D7BC76"/>
+      <stop offset="100%" stop-color="#E9DBB5"/>
+    </linearGradient>
+  </defs>
+  <rect width="900" height="1100" fill="url(#glow)"/>
+
+  {/* Subtle Editorial Grid Lines */}
+  <line x1="40" y1="0" x2="40" y2="1100" stroke="#0A4C38" stroke-width="1" stroke-dasharray="6 6"/>
+  <line x1="860" y1="0" x2="860" y2="1100" stroke="#0A4C38" stroke-width="1" stroke-dasharray="6 6"/>
+  <line x1="0" y1="1040" x2="900" y2="1040" stroke="#0A4C38" stroke-width="1"/>
+
+  {/* Gold Editorial Inner Frame */}
+  <rect x="60" y="60" width="780" height="980" stroke="url(#gold-line)" stroke-width="1.5" opacity="0.6"/>
+
+  {/* Waveform graphic subtle overlay */}
+  <path d="M120 780 Q 150 740 180 780 T 240 780 T 300 780 T 360 780 T 420 780 T 480 780 T 540 780 T 600 780 T 660 780 T 720 780 T 780 780" stroke="#C8A75A" stroke-width="1.5" fill="none" opacity="0.4"/>
+
+  {/* Center Silhouette Graphic / Editorial Portrait Representation */}
+  <circle cx="450" cy="400" r="160" fill="#03291E" stroke="#23775C" stroke-width="2"/>
+  <path d="M250 820 C250 640 330 580 450 580 C570 580 650 640 650 820 Z" fill="#03291E" stroke="#23775C" stroke-width="2"/>
+
+  {/* Monogram / Signature */}
+  <text x="450" y="420" text-anchor="middle" font-family="Georgia, serif" font-size="110" fill="#C8A75A" font-weight="normal" letter-spacing="4">V</text>
+  <text x="450" y="880" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" fill="#AFCDC1" letter-spacing="10">VASANTHAA PORTRAIT</text>
+  <text x="450" y="910" text-anchor="middle" font-family="monospace" font-size="12" fill="#79AD98" letter-spacing="4">CONTENT WRITER × VOICE OVER ARTIST</text>
+</svg>
