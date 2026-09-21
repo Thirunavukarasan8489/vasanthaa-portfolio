@@ -102,7 +102,7 @@ export default function Hero() {
 
               <div className="relative w-full h-full overflow-hidden bg-[#03291E]">
                 <Image
-                  src="/images/hero/vasanthaa.svg"
+                  src="/images/hero/vasanthaa.png"
                   alt="Vasanthaa - Content Writer and Voice Over Artist"
                   fill
                   priority
