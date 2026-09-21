@@ -1855,32 +1855,31 @@ The production-ready personal portfolio website for **Vasanthaa** (Content Write
 #### 4. Quality & Build Verification
 - Zero TypeScript compiler errors (`tsc --noEmit`).
 - Zero ESLint errors or warnings (`npm run lint` passes with 0 problems).
-- Zero build errors (`npm run build` generates 21/21 static & dynamic pages successfully in Next.js 16 App Router).
+- Zero build errors (`npm run build` generates 24/24 static & dynamic pages successfully in Next.js 16 App Router).
 
 ---
 
-## 50. Admin Console, Testimonials Real-Time Sync & Leads Management
+## 50. Route-Based Admin Console, Left Drawer Navigation & Public Chrome Isolation
 
 Implemented a complete, secure, responsive administrative ecosystem tailored for Vasanthaa:
 
-### 1. Admin Console (`/admin`)
-- **Passcode Protection:** Master access passcode gate (`vasanthaa2026`) with session persistence using `useSyncExternalStore` for SSR safety.
-- **Brand Aesthetic:** Adheres strictly to the dark emerald (`#021D15`, `#053827`) and gold (`#C8A75A`) editorial visual identity.
-- **Dual Tab Interface:** Responsive navigation between Testimonials CRUD and Contact Form Leads.
+### 1. Isolated Admin Shell & Public Chrome Suppression
+- **Public Chrome Wrapper (`components/layout/PublicChrome.tsx`):** Detects `usePathname()`. When on any `/admin/*` route, public `<Header />` and `<Footer />` are completely suppressed, providing a focused, distraction-free studio administrative environment.
+- **Passcode Protection:** Handled at `app/admin/layout.tsx` with verification via `app/api/admin/auth/route.ts` checking `process.env.ADMIN_PASSCODE` (fallback: `vasanthaa2026`) and session storage persistence.
 
-### 2. Sub-Second Real-Time Testimonial Sync
-- **CRUD Operations:** Complete Add, Edit, and Delete workflows with form validation (Quote, Author, Role, Company, Discipline, Metric, 5-Star Rating).
-- **Persistent Storage:** Stored in `data/testimonials.json` with API handlers at `app/api/testimonials/route.ts` (supporting `GET`, `POST`, `PUT`, `DELETE`).
-- **Zero-Reload Cross-Tab Sync:** Uses standard browser `BroadcastChannel("portfolio-testimonials-sync")` combined with `localStorage` fallback. When testimonials are modified in `/admin`, the front page (`/`) reflects the change in under 100 milliseconds without refreshing or reloading the browser.
+### 2. Left Side Drawer Navigation
+- **Desktop View ($\ge$ 1024px):** Always open by default (`w-64`). An icon button in the header (`PanelLeftClose` / `PanelLeftOpen`) allows toggling width between expanded (`w-64`) and collapsed (`w-20`) with smooth transitions.
+- **Mobile View (< 1024px):** Hidden off-canvas by default. Tapping the mobile hamburger button (`Menu`) slides the drawer out smoothly with backdrop blur overlay. Closes on backdrop tap, Escape key, or navigation link click.
+- **Navigation Links & Badges:**
+  - Overview (`/admin`)
+  - Testimonials (`/admin/testimonials`) with published review count badge
+  - Contact Leads (`/admin/leads`) with dynamic new-inquiry alert badge
+  - Bottom actions: "View Site" (opens `/` in new tab) and "Sign Out".
 
-### 3. Contact Leads Management
-- **Persistent Inquiries:** Submissions from `/contact` are validated via Zod in `app/api/contact/route.ts` and automatically saved with unique IDs and timestamps to `data/leads.json`.
-- **Leads API (`app/api/leads/route.ts`):** Supports `GET`, `PATCH` (status updates: `new`, `contacted`, `archived`), and `DELETE`.
-- **Admin Dashboard Features:**
-  - Status filter tabs (`All`, `New`, `Contacted`, `Archived`) with real-time counters.
-  - Live search bar filtering by name, email, company, or service.
-  - Interactive lead cards with "View Details" modal showing full message, requested budget, discipline, and direct `mailto:` / `tel:` triggers.
-  - One-click status transitions and deletion.
+### 3. Route-Based Architecture
+- **`/admin` (Studio Overview):** KPI cards (Live Endorsements, New Inquiries, Total Inquiries, Real-time Sync Engine status), recent inquiries preview, recent testimonials preview, and quick actions.
+- **`/admin/testimonials` (Testimonials Studio):** Full CRUD with search, modal forms (with auto-open on `?action=new` and `?edit=id`), 5-star ratings, and sub-second zero-reload sync via `BroadcastChannel("portfolio-testimonials-sync")`.
+- **`/admin/leads` (Client Leads):** Full inquiry management with status filter tabs (`All`, `New`, `Contacted`, `Archived`), live search, and detailed drawer modal with `mailto:` / `tel:` triggers.
 
 ---
 

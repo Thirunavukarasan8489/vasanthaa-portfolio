@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { DM_Serif_Display, Manrope, Caveat } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
+import PublicChrome from "@/components/layout/PublicChrome";
 
 const dmSerif = DM_Serif_Display({
   subsets: ["latin"],
@@ -89,9 +88,7 @@ export default function RootLayout({
       className={`${dmSerif.variable} ${manrope.variable} ${caveat.variable} scroll-smooth`}
     >
       <body className="min-h-screen flex flex-col bg-[#021D15] text-[#F7F4EC] font-sans selection:bg-[#C8A75A] selection:text-[#021D15]">
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <PublicChrome>{children}</PublicChrome>
       </body>
     </html>
   );
