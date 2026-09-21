@@ -12,7 +12,7 @@ export const socialLinks: SocialLink[] = [
   },
   {
     name: "LinkedIn",
-    url: "https://linkedin.com/in/vasanthaa",
+    url: "https://www.linkedin.com/in/vasanthaa-suresh-b01849419?trk=contact-info",
     label: "Vasanthaa on LinkedIn",
   },
   {

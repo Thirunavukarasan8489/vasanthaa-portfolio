@@ -4,10 +4,13 @@ export interface TestimonialItem {
   author: string;
   role: string;
   company: string;
-  discipline: "Writing" | "Voice Over" | "On-Camera";
+  discipline: string;
   highlightMetric?: string;
-  year: string;
+  year?: string;
+  rating?: number;
 }
+
+export type Testimonial = TestimonialItem;
 
 export const testimonialsData: TestimonialItem[] = [
   {

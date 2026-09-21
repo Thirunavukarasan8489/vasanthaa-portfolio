@@ -4,18 +4,22 @@ export const contactFormSchema = z.object({
   name: z
     .string()
     .min(2, { message: "Name must be at least 2 characters long." })
-    .max(80, { message: "Name must be under 80 characters." }),
+    .max(80, { message: "Name must be under 80 characters." })
+    .regex(/^[a-zA-Z\s]+$/, { message: "Name can only contain alphabets and spaces." }),
   email: z
     .string()
     .email({ message: "Please provide a valid email address." }),
   phone: z
     .string()
-    .max(25, { message: "Phone number is too long." })
-    .optional()
-    .or(z.literal("")),
+    .min(7, { message: "Phone number must be at least 7 digits." })
+    .max(15, { message: "Phone number must be at most 15 digits." })
+    .regex(/^[0-9]+$/, { message: "Phone number can only contain numbers (no special characters)." }),
   company: z
     .string()
-    .max(80, { message: "Company name is too long." })
+    .max(80, { message: "Brand / Organization name is too long." })
+    .regex(/^[a-zA-Z0-9\s]*$/, {
+      message: "Brand / Organization can only contain alphanumeric characters (no special characters).",
+    })
     .optional()
     .or(z.literal("")),
   service: z.enum(

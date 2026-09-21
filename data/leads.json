@@ -1,0 +1,26 @@
+[
+  {
+    "id": "lead-1789992054883-mepn9",
+    "name": "45454645",
+    "email": "sffdfdf@sdfdf.vdd",
+    "phone": "*/*/*/95646644666",
+    "company": "tedda sda",
+    "service": "Content Writing",
+    "budget": "",
+    "details": "dfdsf fdfdf dfd fds f",
+    "status": "new",
+    "createdAt": "2026-09-21T12:00:54.883Z"
+  },
+  {
+    "id": "lead-initial-01",
+    "name": "Vasanthaa",
+    "email": "vasanthaa@gmail.com",
+    "phone": "+91 98401 23456",
+    "company": "Bloom Creative Studio",
+    "service": "Content Writing",
+    "budget": "$500 – $1,500 / ₹25,000 – ₹1,00,000",
+    "details": "We are launching a new 8-episode educational reel campaign for a wellness cosmetics brand and need high-retention scripts with visual cue notes.",
+    "status": "new",
+    "createdAt": "2026-09-21T10:30:00.000Z"
+  }
+]

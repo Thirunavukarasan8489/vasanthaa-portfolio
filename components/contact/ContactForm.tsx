@@ -37,6 +37,7 @@ export default function ContactForm({
     formState: { errors },
   } = useForm<ContactFormData>({
     resolver: zodResolver(contactFormSchema),
+    mode: "onChange",
     defaultValues: {
       name: "",
       email: "",
@@ -68,7 +69,7 @@ export default function ContactForm({
         reset();
       } else {
         setServerErrorMessage(
-          resJson.error || "Failed to submit your inquiry. Please try again or email directly."
+          resJson.error || "Failed to submit your Enquiry. Please try again or email directly."
         );
       }
     } catch {
@@ -99,7 +100,7 @@ export default function ContactForm({
         <div className="p-5 bg-[#053827] border border-[#C8A75A] text-[#F7F4EC] flex items-start gap-3">
           <CheckCircle2 className="w-5 h-5 text-[#C8A75A] shrink-0 mt-0.5" />
           <div className="text-sm font-sans space-y-1">
-            <strong className="font-serif text-base block text-[#C8A75A]">Inquiry Received</strong>
+            <strong className="font-serif text-base block text-[#C8A75A]">Enquiry Received</strong>
             <p className="text-[#AFCDC1]">{serverSuccessMessage}</p>
           </div>
         </div>
@@ -124,7 +125,7 @@ export default function ContactForm({
           <input
             id="name"
             type="text"
-            placeholder="e.g. Maya Raman"
+            placeholder="e.g. Vasanthaa"
             aria-invalid={!!errors.name}
             aria-describedby={errors.name ? "name-error" : undefined}
             className={`w-full bg-[#021D15] border px-4 py-3.5 text-sm text-[#F7F4EC] placeholder-[#66736E] focus:outline-none transition-colors ${
@@ -132,7 +133,11 @@ export default function ContactForm({
                 ? "border-red-500 focus:border-red-400"
                 : "border-[#053827] focus:border-[#C8A75A]"
             }`}
-            {...register("name")}
+            {...register("name", {
+              onChange: (e) => {
+                e.target.value = e.target.value.replace(/[^a-zA-Z\s]/g, "");
+              },
+            })}
           />
           {errors.name && (
             <p id="name-error" className="text-xs text-red-400 mt-1 font-mono">
@@ -151,7 +156,7 @@ export default function ContactForm({
           <input
             id="email"
             type="email"
-            placeholder="maya@company.com"
+            placeholder="vasanthaa@company.com"
             aria-invalid={!!errors.email}
             aria-describedby={errors.email ? "email-error" : undefined}
             className={`w-full bg-[#021D15] border px-4 py-3.5 text-sm text-[#F7F4EC] placeholder-[#66736E] focus:outline-none transition-colors ${
@@ -176,15 +181,31 @@ export default function ContactForm({
             htmlFor="phone"
             className="block text-xs font-mono uppercase tracking-widest text-[#AFCDC1] mb-2"
           >
-            Phone / WhatsApp (Optional)
+            Phone / WhatsApp *
           </label>
           <input
             id="phone"
             type="tel"
-            placeholder="+91 98765 43210"
-            className="w-full bg-[#021D15] border border-[#053827] px-4 py-3.5 text-sm text-[#F7F4EC] placeholder-[#66736E] focus:outline-none focus:border-[#C8A75A] transition-colors"
-            {...register("phone")}
+            inputMode="numeric"
+            placeholder="9876543210"
+            aria-invalid={!!errors.phone}
+            aria-describedby={errors.phone ? "phone-error" : undefined}
+            className={`w-full bg-[#021D15] border px-4 py-3.5 text-sm text-[#F7F4EC] placeholder-[#66736E] focus:outline-none transition-colors ${
+              errors.phone
+                ? "border-red-500 focus:border-red-400"
+                : "border-[#053827] focus:border-[#C8A75A]"
+            }`}
+            {...register("phone", {
+              onChange: (e) => {
+                e.target.value = e.target.value.replace(/[^0-9]/g, "");
+              },
+            })}
           />
+          {errors.phone && (
+            <p id="phone-error" className="text-xs text-red-400 mt-1 font-mono">
+              {errors.phone.message}
+            </p>
+          )}
         </div>
 
         <div>
@@ -197,10 +218,25 @@ export default function ContactForm({
           <input
             id="company"
             type="text"
-            placeholder="e.g. Studio Bloom"
-            className="w-full bg-[#021D15] border border-[#053827] px-4 py-3.5 text-sm text-[#F7F4EC] placeholder-[#66736E] focus:outline-none focus:border-[#C8A75A] transition-colors"
-            {...register("company")}
+            placeholder="e.g. Vasanthaa Studio"
+            aria-invalid={!!errors.company}
+            aria-describedby={errors.company ? "company-error" : undefined}
+            className={`w-full bg-[#021D15] border px-4 py-3.5 text-sm text-[#F7F4EC] placeholder-[#66736E] focus:outline-none transition-colors ${
+              errors.company
+                ? "border-red-500 focus:border-red-400"
+                : "border-[#053827] focus:border-[#C8A75A]"
+            }`}
+            {...register("company", {
+              onChange: (e) => {
+                e.target.value = e.target.value.replace(/[^a-zA-Z0-9\s]/g, "");
+              },
+            })}
           />
+          {errors.company && (
+            <p id="company-error" className="text-xs text-red-400 mt-1 font-mono">
+              {errors.company.message}
+            </p>
+          )}
         </div>
       </div>
 
@@ -290,11 +326,11 @@ export default function ContactForm({
           {isSubmitting ? (
             <>
               <Loader2 className="w-4 h-4 animate-spin" />
-              <span>Sending Inquiry...</span>
+              <span>Sending Enquiry...</span>
             </>
           ) : (
             <>
-              <span>Send Project Inquiry</span>
+              <span>Send Project Enquiry</span>
               <ArrowUpRight className="w-4 h-4" />
             </>
           )}

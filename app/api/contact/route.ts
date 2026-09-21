@@ -49,10 +49,43 @@ export async function POST(req: Request) {
 
     const { name, email, phone, company, service, budget, details } = parseResult.data;
 
+    // Persist to data/leads.json
+    try {
+      const fs = await import("fs/promises");
+      const path = await import("path");
+      const leadsFilePath = path.join(process.cwd(), "data", "leads.json");
+      let leads = [];
+      try {
+        const fileContent = await fs.readFile(leadsFilePath, "utf-8");
+        leads = JSON.parse(fileContent);
+        if (!Array.isArray(leads)) leads = [];
+      } catch {
+        leads = [];
+      }
+
+      const newLead = {
+        id: `lead-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`,
+        name,
+        email,
+        phone: phone || "",
+        company: company || "",
+        service,
+        budget: budget || "",
+        details,
+        status: "new",
+        createdAt: new Date().toISOString(),
+      };
+
+      leads.unshift(newLead);
+      await fs.writeFile(leadsFilePath, JSON.stringify(leads, null, 2), "utf-8");
+      console.log(`[Lead Saved] Inquiry from ${name} (${email}) saved to data/leads.json`);
+    } catch (saveErr) {
+      console.error("[Leads Save Error]", saveErr);
+    }
+
     // Optional MongoDB persistence if connection string is configured and valid
     if (process.env.MONGODB_URI && process.env.MONGODB_URI.startsWith("mongodb")) {
       try {
-        // Dynamic import of mongodb or mongoose if available, otherwise safely log
         console.log(`[Contact Form Submission] Saved inquiry from ${name} (${email}) for ${service}`);
       } catch (dbError) {
         console.warn("[Database Notice] Could not persist to DB, continuing with email/memory fallback:", dbError);
