@@ -100,13 +100,8 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-[#79AD98]">
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-center gap-4 text-xs font-mono text-[#79AD98]">
           <p>© {currentYear} Vasanthaa. All rights reserved.</p>
-          {/* <p className="text-[#AFCDC1] flex items-center gap-2">
-            <span>Made thoughtfully</span>
-            <span className="text-[#C8A75A]">✦</span>
-            <span>Human-crafted portfolio</span>
-          </p> */}
         </div>
       </div>
     </footer>

@@ -64,7 +64,7 @@ export default function AudioPlayer({
           setIsPlaying(true);
         })
         .catch(() => {
-          // If audio file doesn't exist yet, simulate playback for seamless UI testing
+          // If audio file simulation or format fallback
           setIsPlaying(true);
         });
     }
@@ -106,7 +106,7 @@ export default function AudioPlayer({
   const progressPercent = duration > 0 ? (currentTime / duration) * 100 : 0;
 
   return (
-    <div className="relative border border-[#053827] bg-[#021D15] p-6 hover:border-[#0A4C38] transition-all duration-300">
+    <div className="relative border border-[#053827] bg-[#021D15] p-5 sm:p-6 hover:border-[#0A4C38] transition-all duration-300 flex flex-col justify-between h-full overflow-hidden">
       {/* Audio element underneath */}
       {audioSrc && (
         <audio
@@ -119,46 +119,46 @@ export default function AudioPlayer({
         />
       )}
 
-      {/* Header Info */}
-      <div className="flex items-center justify-between border-b border-[#053827] pb-3 mb-4">
-        <span className="text-xs font-mono text-[#C8A75A] tracking-wider uppercase">
-          VOICE SAMPLE {sampleNumber}
-        </span>
-        <span className="text-xs text-[#79AD98] font-mono flex items-center gap-1.5">
-          <Volume2 className="w-3.5 h-3.5 text-[#C8A75A]" />
-          <span>{category}</span>
-          <span className="opacity-40">•</span>
-          <span>{language}</span>
-        </span>
-      </div>
+      <div>
+        {/* Header Info */}
+        <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#053827] pb-3 mb-4 text-xs font-mono">
+          <span className="text-[#C8A75A] tracking-wider uppercase font-semibold">
+            VOICE SAMPLE {sampleNumber}
+          </span>
+          <span className="text-[#79AD98] flex items-center gap-1.5 text-[11px]">
+            <Volume2 className="w-3.5 h-3.5 text-[#C8A75A] shrink-0" />
+            <span className="truncate max-w-[130px] sm:max-w-none">{category}</span>
+            <span className="opacity-40">•</span>
+            <span>{language}</span>
+          </span>
+        </div>
 
-      {/* Title */}
-      <h3 className="font-serif text-lg text-[#F7F4EC] tracking-tight mb-4">
-        {title}
-      </h3>
+        {/* Title */}
+        <h3 className="font-serif text-lg text-[#F7F4EC] tracking-tight mb-5 leading-snug min-h-[48px]">
+          {title}
+        </h3>
 
-      {/* Controls and Waveform */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div className="flex items-center gap-4">
+        {/* Controls Row: Play/Pause Button + Fluid Waveform */}
+        <div className="flex items-center gap-3.5 mb-3 w-full">
           {/* Play/Pause Button */}
           <button
             onClick={togglePlay}
             aria-label={isPlaying ? `Pause ${title}` : `Play ${title}`}
-            className="flex h-12 w-12 shrink-0 items-center justify-center border border-[#C8A75A] bg-[#053827] text-[#C8A75A] hover:bg-[#C8A75A] hover:text-[#021D15] transition-all focus:outline-none focus:ring-2 focus:ring-[#C8A75A]"
+            className="flex h-11 w-11 shrink-0 items-center justify-center border border-[#C8A75A] bg-[#053827] text-[#C8A75A] hover:bg-[#C8A75A] hover:text-[#021D15] active:scale-95 transition-all focus:outline-none focus:ring-2 focus:ring-[#C8A75A]"
           >
             {isPlaying ? (
-              <Pause className="w-5 h-5 fill-current" />
+              <Pause className="w-4 h-4 fill-current" />
             ) : (
-              <Play className="w-5 h-5 fill-current ml-0.5" />
+              <Play className="w-4 h-4 fill-current ml-0.5" />
             )}
           </button>
 
-          {/* Waveform Visualization */}
+          {/* Fluid Waveform Visualization */}
           <AudioWaveform isPlaying={isPlaying} progressPercent={progressPercent} />
         </div>
 
-        {/* Progress & Time */}
-        <div className="flex items-center gap-3 w-full sm:w-auto">
+        {/* Scrub Bar & Times Row */}
+        <div className="space-y-1 pt-1 w-full">
           <input
             type="range"
             min="0"
@@ -166,18 +166,19 @@ export default function AudioPlayer({
             value={currentTime}
             onChange={handleSeek}
             aria-label="Audio progress slider"
-            className="h-1.5 w-full sm:w-32 bg-[#053827] accent-[#C8A75A] cursor-pointer rounded-none"
+            className="h-1.5 w-full bg-[#053827] accent-[#C8A75A] cursor-pointer rounded-none"
           />
-          <span className="font-mono text-xs text-[#79AD98] shrink-0 min-w-[45px] text-right">
-            {formatTime(currentTime)} / {totalTimeStr}
-          </span>
+          <div className="flex items-center justify-between text-[11px] font-mono text-[#79AD98]">
+            <span>{formatTime(currentTime)}</span>
+            <span>{totalTimeStr}</span>
+          </div>
         </div>
       </div>
 
       {tone && (
-        <div className="mt-4 pt-3 border-t border-[#053827]/60 flex items-center gap-2 text-xs text-[#AFCDC1]">
-          <span className="text-[#79AD98] font-mono text-[10px] uppercase">Tone:</span>
-          <span>{tone}</span>
+        <div className="mt-4 pt-3 border-t border-[#053827]/60 flex items-baseline gap-2 text-xs text-[#AFCDC1]">
+          <span className="text-[#79AD98] font-mono text-[10px] uppercase shrink-0">Tone:</span>
+          <span className="line-clamp-1">{tone}</span>
         </div>
       )}
     </div>
