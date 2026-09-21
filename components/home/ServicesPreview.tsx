@@ -2,6 +2,7 @@ import Link from "next/link";
 import SectionLabel from "@/components/ui/SectionLabel";
 import { servicesData } from "@/data/services";
 import { ArrowRight } from "lucide-react";
+import Reveal from "@/components/animation/Reveal";
 
 export default function ServicesPreview() {
   const writingServices = servicesData.filter((s) => s.category === "writing");
@@ -10,23 +11,25 @@ export default function ServicesPreview() {
   return (
     <section className="py-24 bg-[#021D15] border-b border-[#053827]" id="services">
       <div className="editorial-container">
-        {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-          <div>
-            <SectionLabel number="02" label="SERVICES" className="mb-3" />
-            <h2 className="font-serif text-3xl md:text-5xl font-normal text-[#F7F4EC] tracking-tight">
-              Dual Craft: <span className="italic text-[#C8A75A]">Words × Voice</span>
-            </h2>
+        {/* Header with scroll reveal */}
+        <Reveal direction="up" duration={0.6}>
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+            <div>
+              <SectionLabel number="02" label="SERVICES" className="mb-3" />
+              <h2 className="font-serif text-3xl md:text-5xl font-normal text-[#F7F4EC] tracking-tight">
+                Dual Craft: <span className="italic text-[#C8A75A]">Words × Voice</span>
+              </h2>
+            </div>
+            <p className="text-sm font-sans text-[#79AD98] max-w-md">
+              Whether through the written page or behind the microphone, every deliverable is crafted for nuance, rhythm, and genuine emotional resonance.
+            </p>
           </div>
-          <p className="text-sm font-sans text-[#79AD98] max-w-md">
-            Whether through the written page or behind the microphone, every deliverable is crafted for nuance, rhythm, and genuine emotional resonance.
-          </p>
-        </div>
+        </Reveal>
 
         {/* Two-Column Editorial Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
           {/* Column 1: Content Writing */}
-          <div className="space-y-6">
+          <Reveal direction="up" delay={0.15} duration={0.7} className="space-y-6">
             <div className="border-b border-[#0A4C38] pb-4">
               <div className="flex items-center justify-between">
                 <h3 className="font-serif text-2xl text-[#F7F4EC] tracking-wide">
@@ -74,10 +77,10 @@ export default function ServicesPreview() {
                 <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>
-          </div>
+          </Reveal>
 
           {/* Column 2: Voice Over */}
-          <div className="space-y-6">
+          <Reveal direction="up" delay={0.3} duration={0.7} className="space-y-6">
             <div className="border-b border-[#0A4C38] pb-4">
               <div className="flex items-center justify-between">
                 <h3 className="font-serif text-2xl text-[#F7F4EC] tracking-wide">
@@ -125,7 +128,7 @@ export default function ServicesPreview() {
                 <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>
-          </div>
+          </Reveal>
         </div>
       </div>
     </section>

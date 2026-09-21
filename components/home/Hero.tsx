@@ -1,7 +1,10 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowDownRight, PencilSparkles } from "lucide-react";
 import SectionLabel from "@/components/ui/SectionLabel";
+import { motion } from "motion/react";
 
 export default function Hero() {
   return (
@@ -16,21 +19,43 @@ export default function Hero() {
         <div className="hidden md:grid md:grid-cols-12 gap-12 lg:gap-16 items-center">
           {/* Left Column — Editorial Typography */}
           <div className="md:col-span-7 flex flex-col justify-center space-y-8">
-            {/* Section label */}
-            <SectionLabel number="01" label="HELLO" />
+            {/* 1. Section label appears */}
+            <motion.div
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+            >
+              <SectionLabel number="01" label="HELLO" />
+            </motion.div>
 
-            {/* Main Greeting & Heading */}
+            {/* 2 & 3. Greeting and Main Name */}
             <div className="space-y-2">
-              <span className="font-handwriting text-3xl lg:text-4xl text-[#C8A75A] block">
+              <motion.span
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.25 }}
+                className="font-handwriting text-3xl lg:text-4xl text-[#C8A75A] block"
+              >
                 Hello,
-              </span>
-              <h1 className="font-serif text-5xl lg:text-7xl font-normal tracking-tight text-[#F7F4EC] leading-[1.08]">
+              </motion.span>
+
+              <motion.h1
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                className="font-serif text-5xl lg:text-7xl font-normal tracking-tight text-[#F7F4EC] leading-[1.08]"
+              >
                 I&apos;m Vasanthaa<span className="text-[#C8A75A]">.</span>
-              </h1>
+              </motion.h1>
             </div>
 
-            {/* Subtitles: Content Writer & Voice Over Artist */}
-            <div className="border-l-2 border-[#C8A75A] pl-5 space-y-1 py-1">
+            {/* 4. Subtitles: Content Writer & Voice Over Artist */}
+            <motion.div
+              initial={{ opacity: 0, x: -18 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.55 }}
+              className="border-l-2 border-[#C8A75A] pl-5 space-y-1 py-1"
+            >
               <h2 className="text-sm lg:text-base font-mono uppercase tracking-widest text-[#DCEAE5]">
                 Content Writer
               </h2>
@@ -40,16 +65,25 @@ export default function Hero() {
               <p className="text-xs text-[#79AD98] font-mono tracking-wider pt-1">
                 Creative Storyteller
               </p>
-            </div>
+            </motion.div>
 
-            {/* Core Brand Positioning */}
-            <p className="font-serif italic text-2xl lg:text-3xl text-[#DCEAE5] leading-relaxed max-w-xl font-light">
-              &ldquo;I shape thoughts into words and tune voices that make every
-              message felt.&rdquo;
-            </p>
+            {/* 5. Core Brand Positioning */}
+            <motion.p
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.65, delay: 0.7 }}
+              className="font-serif italic text-2xl lg:text-3xl text-[#DCEAE5] leading-relaxed max-w-xl font-light"
+            >
+              &ldquo;I shape thoughts into words and tune voices that make every message felt.&rdquo;
+            </motion.p>
 
-            {/* Aesthetic Words x Voice Identity Graphic */}
-            <div className="flex items-center gap-6 pt-2 text-xs font-mono text-[#AFCDC1]">
+            {/* 6. Words x Voice Motif */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.85 }}
+              className="flex items-center gap-6 pt-2 text-xs font-mono text-[#AFCDC1]"
+            >
               <div className="flex items-center gap-2">
                 <span className="text-[#C8A75A]">Words</span>
                 <span className="text-[#0A4C38]">────────</span>
@@ -59,10 +93,15 @@ export default function Hero() {
                 <span className="text-[#C8A75A]">Voice</span>
                 <span className="text-[#C8A75A]/60">∿∿∿∿∿∿</span>
               </div>
-            </div>
+            </motion.div>
 
-            {/* CTAs */}
-            <div className="pt-4 flex items-center gap-6">
+            {/* 7. CTAs */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 1.0 }}
+              className="pt-4 flex items-center gap-6"
+            >
               <Link
                 href="#work-preview"
                 className="group inline-flex items-center gap-2.5 bg-[#C8A75A] text-[#021D15] px-7 py-4 text-xs font-mono uppercase tracking-widest font-semibold hover:bg-[#D7BC76] transition-all"
@@ -77,13 +116,18 @@ export default function Hero() {
                 <span>Start a conversation</span>
                 <span>→</span>
               </Link>
-            </div>
+            </motion.div>
           </div>
 
           {/* Right Column — Editorial Portrait Presentation */}
           <div className="md:col-span-5 relative flex justify-center">
             {/* Experience Stamp */}
-            <div className="absolute -top-6 -left-6 z-20 bg-[#053827] border border-[#C8A75A]/40 p-4 shadow-xl backdrop-blur-md">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: 0.8, type: "spring" }}
+              className="absolute -top-6 -left-6 z-20 bg-[#053827] border border-[#C8A75A]/40 p-4 shadow-xl backdrop-blur-md"
+            >
               <span className="block font-serif text-3xl text-[#C8A75A] leading-none">
                 02+
               </span>
@@ -93,10 +137,15 @@ export default function Hero() {
               <span className="block text-[9px] font-mono tracking-widest text-[#79AD98] uppercase">
                 Experience
               </span>
-            </div>
+            </motion.div>
 
             {/* Frame & Image */}
-            <div className="relative w-full max-w-[380px] aspect-[4/5] bg-[#053827] border border-[#0A4C38] p-3">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.94 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              className="relative w-full max-w-[380px] aspect-[4/5] bg-[#053827] border border-[#0A4C38] p-3 shadow-2xl"
+            >
               {/* Outer decorative line offset */}
               <div className="absolute -inset-2 border border-[#C8A75A]/30 pointer-events-none" />
 
@@ -112,16 +161,26 @@ export default function Hero() {
               </div>
 
               {/* Bottom tag */}
-              <div className="absolute bottom-6 right-6 bg-[#021D15]/90 border border-[#053827] px-3 py-1.5 text-[11px] font-mono text-[#C8A75A] flex items-center gap-1.5 backdrop-blur-sm">
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.95 }}
+                className="absolute bottom-6 right-6 bg-[#021D15]/90 border border-[#053827] px-3 py-1.5 text-[11px] font-mono text-[#C8A75A] flex items-center gap-1.5 backdrop-blur-sm"
+              >
                 <PencilSparkles className="w-3 h-3 text-[#C8A75A]" />
                 <span>Available for Q2 Collaborations</span>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           </div>
         </div>
 
-        {/* MOBILE LAYOUT (Independently Composed) */}
-        <div className="flex md:hidden flex-col space-y-6">
+        {/* MOBILE LAYOUT (Independently Composed & Animated) */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="flex md:hidden flex-col space-y-6"
+        >
           <SectionLabel number="01" label="HELLO" />
 
           <div>
@@ -162,8 +221,7 @@ export default function Hero() {
 
           {/* Message */}
           <p className="font-serif italic text-lg text-[#DCEAE5] leading-snug">
-            &ldquo;I shape thoughts into words and tune voices that make every
-            message felt.&rdquo;
+            &ldquo;I shape thoughts into words and tune voices that make every message felt.&rdquo;
           </p>
 
           {/* CTA */}
@@ -183,7 +241,7 @@ export default function Hero() {
               <span>→</span>
             </Link>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

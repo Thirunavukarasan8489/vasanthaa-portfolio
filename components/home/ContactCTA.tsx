@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowUpRight, Mail } from "lucide-react";
 import SectionLabel from "@/components/ui/SectionLabel";
 import { socialLinks } from "@/data/social-links";
+import Reveal from "@/components/animation/Reveal";
 
 export default function ContactCTA() {
   return (
@@ -15,7 +16,7 @@ export default function ContactCTA() {
       </div>
 
       <div className="editorial-container relative">
-        <div className="max-w-3xl space-y-8">
+        <Reveal direction="up" duration={0.7} className="max-w-3xl space-y-8">
           <SectionLabel number="08" label="INQUIRIES & COMMISSIONS" />
 
           <h2 className="font-serif text-4xl sm:text-6xl lg:text-7xl font-normal text-[#F7F4EC] tracking-tight leading-[1.06]">
@@ -64,7 +65,7 @@ export default function ContactCTA() {
               </a>
             ))}
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

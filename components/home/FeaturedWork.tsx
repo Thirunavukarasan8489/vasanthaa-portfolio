@@ -1,28 +1,31 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import SectionLabel from "@/components/ui/SectionLabel";
+import Reveal from "@/components/animation/Reveal";
 
 export default function FeaturedWork() {
   return (
     <section className="py-24 bg-[#03291E] border-b border-[#053827]" id="work-preview">
       <div className="editorial-container">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-4">
-          <div>
-            <SectionLabel number="03" label="PORTFOLIO DISCIPLINED" className="mb-3" />
-            <h2 className="font-serif text-3xl md:text-5xl font-normal text-[#F7F4EC] tracking-tight">
-              Selected Disciplines
-            </h2>
+        <Reveal direction="up" duration={0.6}>
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-4">
+            <div>
+              <SectionLabel number="03" label="PORTFOLIO DISCIPLINED" className="mb-3" />
+              <h2 className="font-serif text-3xl md:text-5xl font-normal text-[#F7F4EC] tracking-tight">
+                Selected Disciplines
+              </h2>
+            </div>
+            <p className="text-xs font-mono text-[#79AD98] uppercase tracking-widest">
+              Three Expressions • One Storyteller
+            </p>
           </div>
-          <p className="text-xs font-mono text-[#79AD98] uppercase tracking-widest">
-            Three Expressions • One Storyteller
-          </p>
-        </div>
+        </Reveal>
 
         {/* Asymmetrical 3-Category Layout */}
         <div className="space-y-20">
           {/* CATEGORY 01: WORDS, WRITTEN (Left-leaning) */}
-          <div className="relative border-t border-[#053827] pt-12">
+          <Reveal direction="up" delay={0.1} duration={0.7} className="relative border-t border-[#053827] pt-12">
             <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-baseline">
               <div className="md:col-span-2">
                 <span className="font-mono text-4xl lg:text-5xl text-[#C8A75A]/40 font-light">
@@ -58,10 +61,10 @@ export default function FeaturedWork() {
                 </Link>
               </div>
             </div>
-          </div>
+          </Reveal>
 
           {/* CATEGORY 02: WORDS, VOICED (Right-leaning alignment) */}
-          <div className="relative border-t border-[#053827] pt-12">
+          <Reveal direction="up" delay={0.15} duration={0.7} className="relative border-t border-[#053827] pt-12">
             <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-baseline">
               <div className="md:col-span-4 order-3 md:order-1 flex md:justify-start items-center">
                 <Link
@@ -97,10 +100,10 @@ export default function FeaturedWork() {
                 </span>
               </div>
             </div>
-          </div>
+          </Reveal>
 
           {/* CATEGORY 03: ON CAMERA (Wide editorial banner) */}
-          <div className="relative border-t border-[#053827] pt-12">
+          <Reveal direction="up" delay={0.2} duration={0.7} className="relative border-t border-[#053827] pt-12">
             <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-baseline">
               <div className="md:col-span-2">
                 <span className="font-mono text-4xl lg:text-5xl text-[#C8A75A]/40 font-light">
@@ -136,7 +139,7 @@ export default function FeaturedWork() {
                 </Link>
               </div>
             </div>
-          </div>
+          </Reveal>
         </div>
       </div>
     </section>
