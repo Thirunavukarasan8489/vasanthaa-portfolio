@@ -72,7 +72,7 @@ export default function AboutPage() {
             <div className="relative w-full aspect-[4/5] bg-[#053827] border border-[#0A4C38] p-3">
               <div className="relative w-full h-full overflow-hidden bg-[#03291E]">
                 <Image
-                  src="/images/hero/vasanthaa.svg"
+                  src="/images/hero/vasanthaa.png"
                   alt="Vasanthaa - Content Writer & Voice Over Artist"
                   fill
                   className="object-cover"
