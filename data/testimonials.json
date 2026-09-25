@@ -1,5 +1,16 @@
 [
   {
+    "id": "test-1790355901405",
+    "quote": "Her voice is so super",
+    "author": "test",
+    "role": "creative",
+    "company": "blooms",
+    "discipline": "Content Strategy & Scripts",
+    "highlightMetric": "80% watch time",
+    "year": "2026",
+    "rating": 5
+  },
+  {
     "id": "test-01",
     "quote": "Vasanthaa's scriptwriting completely shifted our reel performance. She understands that the first three seconds dictate the entire video. Our retention rates jumped significantly, and the tone felt organic rather than pushy.",
     "author": "Aditi Sundaram",
@@ -7,7 +18,8 @@
     "company": "Studio Bloom Creative",
     "discipline": "Writing",
     "highlightMetric": "+42% Watch Retention",
-    "year": "2026"
+    "year": "2026",
+    "rating": 5
   },
   {
     "id": "test-02",
@@ -17,7 +29,8 @@
     "company": "Echo Soundworks",
     "discipline": "Voice Over",
     "highlightMetric": "Studio Commercial Take",
-    "year": "2025"
+    "year": "2025",
+    "rating": 5
   },
   {
     "id": "test-03",
@@ -27,7 +40,8 @@
     "company": "Vernacular Living",
     "discipline": "On-Camera",
     "highlightMetric": "Documentary Feature",
-    "year": "2026"
+    "year": "2026",
+    "rating": 5
   },
   {
     "id": "test-04",
@@ -37,6 +51,7 @@
     "company": "Naturessence Ayurveda",
     "discipline": "Writing",
     "highlightMetric": "6-Part Campaign",
-    "year": "2025"
+    "year": "2025",
+    "rating": 5
   }
 ]

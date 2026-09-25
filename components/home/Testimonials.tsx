@@ -16,8 +16,9 @@ export default function Testimonials() {
     fetch("/api/testimonials")
       .then((res) => res.json())
       .then((data) => {
-        if (data.success && Array.isArray(data.testimonials) && data.testimonials.length > 0) {
-          setItems(data.testimonials);
+        const list = data.testimonials || data.data;
+        if (data.success && Array.isArray(list) && list.length > 0) {
+          setItems(list);
         }
       })
       .catch(() => {
@@ -29,9 +30,10 @@ export default function Testimonials() {
     try {
       channel = new BroadcastChannel("portfolio-testimonials-sync");
       channel.onmessage = (event) => {
-        if (event.data?.testimonials && Array.isArray(event.data.testimonials)) {
-          setItems(event.data.testimonials);
-          setCurrentIndex((prev) => Math.min(prev, Math.max(0, event.data.testimonials.length - 1)));
+        const list = event.data?.testimonials || event.data?.data;
+        if (list && Array.isArray(list)) {
+          setItems(list);
+          setCurrentIndex((prev) => Math.min(prev, Math.max(0, list.length - 1)));
         }
       };
     } catch {
@@ -117,7 +119,7 @@ export default function Testimonials() {
 
         {/* Outer Editorial Container */}
         <div
-          className="border border-[#053827] bg-[#03291E] p-6 sm:p-10 lg:p-14 relative overflow-hidden shadow-2xl"
+          className="border border-[#053827] bg-[#03291E] p-5 sm:p-8 md:p-10 lg:p-14 relative overflow-hidden shadow-2xl"
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
         >
@@ -133,14 +135,14 @@ export default function Testimonials() {
                   className="w-full shrink-0 min-w-full"
                   aria-hidden={testimonials[safeIndex]?.id !== item.id}
                 >
-                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-center">
                     {/* Quote Icon & Discipline Meta */}
-                    <div className="lg:col-span-3 flex lg:flex-col justify-between items-start border-b lg:border-b-0 lg:border-r border-[#053827] pb-6 lg:pb-0 lg:pr-8">
-                      <div className="space-y-4">
-                        <div className="w-12 h-12 flex items-center justify-center border border-[#C8A75A] bg-[#053827] text-[#C8A75A] shadow-md">
-                          <Quote className="w-5 h-5 fill-current" />
+                    <div className="lg:col-span-3 flex flex-wrap sm:flex-nowrap lg:flex-col justify-between items-start gap-4 border-b lg:border-b-0 lg:border-r border-[#053827] pb-5 lg:pb-0 lg:pr-8">
+                      <div className="flex items-center lg:items-start gap-3 lg:gap-0 lg:space-y-4">
+                        <div className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center border border-[#C8A75A] bg-[#053827] text-[#C8A75A] shadow-md shrink-0">
+                          <Quote className="w-4 h-4 sm:w-5 sm:h-5 fill-current" />
                         </div>
-                        <div className="hidden lg:block">
+                        <div>
                           <span className="text-[10px] font-mono uppercase tracking-widest text-[#79AD98] block">
                             Discipline
                           </span>
@@ -151,11 +153,11 @@ export default function Testimonials() {
                       </div>
 
                       {item.highlightMetric && (
-                        <div className="bg-[#021D15] border border-[#0A4C38] px-3.5 py-2">
+                        <div className="bg-[#021D15] border border-[#0A4C38] px-3 py-1.5 sm:px-3.5 sm:py-2">
                           <span className="text-[10px] font-mono uppercase tracking-widest text-[#79AD98] block">
                             Result / Impact
                           </span>
-                          <span className="text-xs font-mono text-[#F7F4EC] font-semibold block mt-0.5">
+                          <span className="text-xs font-mono text-[#F7F4EC] font-semibold block mt-0.5 whitespace-nowrap">
                             {item.highlightMetric}
                           </span>
                         </div>
@@ -163,13 +165,13 @@ export default function Testimonials() {
                     </div>
 
                     {/* Quote & Author Info */}
-                    <div className="lg:col-span-9 space-y-6">
-                      <blockquote className="font-serif italic text-xl sm:text-2xl lg:text-3xl text-[#F7F4EC] leading-relaxed font-light select-none">
+                    <div className="lg:col-span-9 space-y-4 sm:space-y-6">
+                      <blockquote className="font-serif italic text-lg sm:text-2xl lg:text-3xl text-[#F7F4EC] leading-relaxed font-light select-none">
                         &ldquo;{item.quote}&rdquo;
                       </blockquote>
 
                       <div>
-                        <h3 className="font-serif text-xl text-[#F7F4EC] tracking-wide">
+                        <h3 className="font-serif text-lg sm:text-xl text-[#F7F4EC] tracking-wide">
                           {item.author}
                         </h3>
                         <p className="text-xs font-mono text-[#AFCDC1] mt-0.5">
@@ -185,7 +187,7 @@ export default function Testimonials() {
           </div>
 
           {/* Navigation Controls Bar - Anchored inside card */}
-          <div className="border-t border-[#053827] pt-6 mt-8 flex items-center justify-between">
+          <div className="border-t border-[#053827] pt-5 sm:pt-6 mt-6 sm:mt-8 flex items-center justify-between gap-4">
             {/* Slide Position Counter */}
             <div className="flex items-center gap-3">
               <span className="text-xs font-mono text-[#79AD98]">
@@ -210,7 +212,7 @@ export default function Testimonials() {
               <button
                 onClick={handlePrev}
                 aria-label="Previous testimonial slide"
-                className="p-3 border border-[#0A4C38] bg-[#021D15] text-[#AFCDC1] hover:text-[#C8A75A] hover:border-[#C8A75A] active:scale-95 transition-all focus:outline-none focus:ring-1 focus:ring-[#C8A75A]"
+                className="p-2.5 sm:p-3 border border-[#0A4C38] bg-[#021D15] text-[#AFCDC1] hover:text-[#C8A75A] hover:border-[#C8A75A] active:scale-95 transition-all focus:outline-none focus:ring-1 focus:ring-[#C8A75A]"
               >
                 <ArrowLeft className="w-4 h-4" />
               </button>
@@ -218,7 +220,7 @@ export default function Testimonials() {
               <button
                 onClick={handleNext}
                 aria-label="Next testimonial slide"
-                className="p-3 border border-[#0A4C38] bg-[#021D15] text-[#AFCDC1] hover:text-[#C8A75A] hover:border-[#C8A75A] active:scale-95 transition-all focus:outline-none focus:ring-1 focus:ring-[#C8A75A]"
+                className="p-2.5 sm:p-3 border border-[#0A4C38] bg-[#021D15] text-[#AFCDC1] hover:text-[#C8A75A] hover:border-[#C8A75A] active:scale-95 transition-all focus:outline-none focus:ring-1 focus:ring-[#C8A75A]"
               >
                 <ArrowRight className="w-4 h-4" />
               </button>
@@ -227,12 +229,12 @@ export default function Testimonials() {
         </div>
 
         {/* Tab Selector Indicators */}
-        <div className="mt-8 flex flex-wrap justify-center gap-3">
+        <div className="mt-8 flex flex-wrap justify-center gap-2 sm:gap-3">
           {testimonials.map((item, idx) => (
             <button
               key={item.id}
               onClick={() => setCurrentIndex(idx)}
-              className={`px-4 py-2 text-xs font-mono tracking-wider uppercase transition-all duration-300 ${
+              className={`px-3 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-xs font-mono tracking-wider uppercase transition-all duration-300 max-w-full truncate ${
                 safeIndex === idx
                   ? "bg-[#C8A75A] text-[#021D15] font-semibold scale-105 shadow-md"
                   : "bg-[#03291E] border border-[#053827] text-[#79AD98] hover:border-[#0A4C38] hover:text-[#F7F4EC]"

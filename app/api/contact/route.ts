@@ -49,7 +49,34 @@ export async function POST(req: Request) {
 
     const { name, email, phone, company, service, budget, details } = parseResult.data;
 
-    // Persist to data/leads.json
+    let mongoId: string | null = null;
+
+    // 1. Primary persistence: Save directly to MongoDB Atlas
+    if (process.env.MONGODB_URI) {
+      try {
+        const { connectDB } = await import("@/lib/db");
+        const { Contact } = await import("@/models/Contact");
+        await connectDB();
+
+        const newDoc = await Contact.create({
+          name,
+          email,
+          phone: phone || "",
+          company: company || "",
+          service,
+          budget: budget || "",
+          details,
+          status: "new",
+        });
+
+        mongoId = newDoc._id.toString();
+        console.log(`[MongoDB] Successfully persisted lead from ${name} (${email}) with ID: ${mongoId}`);
+      } catch (dbError) {
+        console.error("[MongoDB Error] Failed to persist inquiry to database:", dbError);
+      }
+    }
+
+    // 2. Backup/Mirror persistence to data/leads.json
     try {
       const fs = await import("fs/promises");
       const path = await import("path");
@@ -64,7 +91,7 @@ export async function POST(req: Request) {
       }
 
       const newLead = {
-        id: `lead-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`,
+        id: mongoId || `lead-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`,
         name,
         email,
         phone: phone || "",
@@ -78,18 +105,8 @@ export async function POST(req: Request) {
 
       leads.unshift(newLead);
       await fs.writeFile(leadsFilePath, JSON.stringify(leads, null, 2), "utf-8");
-      console.log(`[Lead Saved] Inquiry from ${name} (${email}) saved to data/leads.json`);
     } catch (saveErr) {
-      console.error("[Leads Save Error]", saveErr);
-    }
-
-    // Optional MongoDB persistence if connection string is configured and valid
-    if (process.env.MONGODB_URI && process.env.MONGODB_URI.startsWith("mongodb")) {
-      try {
-        console.log(`[Contact Form Submission] Saved inquiry from ${name} (${email}) for ${service}`);
-      } catch (dbError) {
-        console.warn("[Database Notice] Could not persist to DB, continuing with email/memory fallback:", dbError);
-      }
+      console.error("[Leads Backup Error]", saveErr);
     }
 
     console.log("[Inquiry Received]", {
